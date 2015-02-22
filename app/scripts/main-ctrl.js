@@ -3,7 +3,7 @@ angular.module( 'app' )
     'use strict';
 
     var notes = [];
-    $scope.$watch( function(){ return notesStorage.keys; }, function(){
+    $scope.$watch( function(){ return notesStorage.all; }, function(){
         $scope.notes = notes = notesStorage.all;
     }, true );
 
