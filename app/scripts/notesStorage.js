@@ -5,6 +5,14 @@ angular.module( 'app' )
     var storage = $window.localStorage;
 
     return {
+        get all (){
+            return Object.keys(storage).map( function( name ){
+                return {
+                    name : name,
+                    text : storage[ name ]
+                };
+            } );
+        },
         get keys (){ 
             return Object.keys(storage);
         },
@@ -16,6 +24,9 @@ angular.module( 'app' )
         },
         remove : function( name ){
             return $window.localStorage.removeItem( name );
+        },
+        contains : function( name ){
+            return name in storage;
         }
     };
 

@@ -4,14 +4,20 @@ angular.module( 'app' )
 
     var notes = [];
     $scope.$watch( function(){ return notesStorage.keys; }, function(){
-        $scope.notes = notes = notesStorage.keys;
+        $scope.notes = notes = notesStorage.all;
     }, true );
 
     var note = $scope.note = {};
 
+    // help functions
     Object.defineProperty(this, 'overwriting', { 
         get : function(){
-            return note.name in notes;
+            return notesStorage.contains( note.name );
+        } 
+    });
+    Object.defineProperty(this, 'isnew', { 
+        get : function(){             
+            return !!note.name && !(notesStorage.contains( note.name ));
         } 
     });
 
@@ -24,13 +30,14 @@ angular.module( 'app' )
         notesStorage.set( note.name || '[no title]', note.text || '' );
     };
 
-    this.open = function( name ){
-        note.name = name;
-        note.text = notesStorage.get( name );
+    this.open = function( anote ){
+        console.log( anote );
+        note.name = anote.name;
+        note.text = anote.text;
     };
 
-    this.remove = function( name ){
-        notesStorage.remove( name );
+    this.remove = function( anote ){
+        notesStorage.remove( anote.name );
     };
 
 

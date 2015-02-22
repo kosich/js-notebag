@@ -9,22 +9,27 @@
             <section class='row'>
                 <aside class='col-md-2'>
                     <div class='form-group'>
-                        <input type='text' tabindex='4' class='form-control' ng-model='filter.name' >
+                        <input type='text' tabindex='4' class='form-control' ng-model='filterString' >
                     </div>
-                    <p class='form-group clearfix'  ng-repeat='noteName in notes | filter:filter.name'>
-                        <button type="button" ng-click='main.remove(noteName)' class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <a href ng-click='main.open(noteName)'>
-                            {{ noteName }}
-                        </a>
-                    </p>
+                    <div class='clearfix'  ng-repeat='anote in notes | filter:filterString'>
+                        <button type="button" ng-click='main.remove(anote)' class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <div class='bold'>
+                            <a href ng-click='main.open(anote)'>
+                                {{ anote.name }}
+                            </a>
+                        </div>
+                        <div class='small'>{{ anote.text|shorten }}</div>
+                        <hr ng-if='!$last' />
+                    </div>
                 </aside>
 
                 <main class='col-md-10'>
+                                     
                     <form class='form form-horizontal'>
 
                         <div class='form-group'>
                             <div class='col-md-2'>
-                                <button tabindex='3' type='submit'
+                                <button tabindex='5' type='submit'
                                     ng-click='main.create()'
                                     class='btn btn-info btn-block btn-lg'>new</button>
                             </div>
@@ -33,7 +38,7 @@
                             </div>
                             <div class='col-md-2'>
                                 <button tabindex='3' type='submit'
-                                    ng-class='{ "btn-danger" : main.overwriting, "btn-success" : (!!note.name && !main.overwriting)  }'
+                                    ng-class='{ "btn-danger" : main.overwriting, "btn-success" : main.isnew  }'
                                     ng-click='main.save()'
                                     ng-disabled='!note.name'
                                     class='btn btn-block btn-lg'>save</button>
@@ -56,6 +61,7 @@
 
         <script src='scripts/app.js' ></script>
         <script src='scripts/notesStorage.js' ></script>
+        <script src='scripts/filters.js' ></script>
         <script src='scripts/main-ctrl.js' ></script>
 
     </body>
