@@ -15,8 +15,12 @@ angular.module( 'app' )
         } 
     });
 
+    this.create = function( ){
+        note.name = '';
+        note.text = '';
+    };
+
     this.save = function( ){
-        console.log( note.name, note.text );
         notesStorage.set( note.name || '[no title]', note.text || '' );
     };
 
