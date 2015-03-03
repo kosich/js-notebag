@@ -22,6 +22,13 @@
   },
   "devDependencies": {
     "gulp": "^3.8.11",
-    "gulp-traceur": "^0.17.0"
+    "gulp-concat": "^2.5.2",
+    "gulp-load-plugins": "^0.8.1",
+    "gulp-plumber": "^0.6.6",
+    "gulp-sourcemaps": "^1.5.0",
+    "gulp-traceur": "^0.17.0",
+    "gulp-uglify": "^1.1.0",
+    "gulp-watch": "^4.1.1",
+    "gulp-webpack": "^1.2.0"
   }
 }

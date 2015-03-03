@@ -1,9 +1,11 @@
 angular.module( 'app' )
-.controller( 'main', [ '$scope', 'notesStorage', function( $scope, notesStorage ){
+.controller( 'main', [ '$scope', 'notesStorage', ( $scope, notesStorage ) => {
     'use strict';
 
     var notes = [];
-    $scope.$watch( function(){ return notesStorage.all; }, function(){
+
+    // TODO: refactor: awfull all $digest call
+    $scope.$watch( ()=> notesStorage.all , ()=>{
         $scope.notes = notes = notesStorage.all;
     }, true );
 
@@ -15,13 +17,14 @@ angular.module( 'app' )
             return notesStorage.contains( note.name );
         } 
     });
+
     Object.defineProperty(this, 'isnew', { 
         get : function(){             
             return !!note.name && !(notesStorage.contains( note.name ));
         } 
     });
 
-    this.create = function( ){
+    this.create = ( )=>{
         note.name = '';
         note.text = '';
     };
@@ -30,8 +33,8 @@ angular.module( 'app' )
         notesStorage.set( note.name || '[no title]', note.text || '' );
     };
 
-    this.open = function( anote ){
-        console.log( anote );
+    this.open = ( anote ) => {
+        console.log( 'opened', anote );
         note.name = anote.name;
         note.text = anote.text;
     };
@@ -41,5 +44,5 @@ angular.module( 'app' )
     };
 
 
-} ] )
+} ] );
 

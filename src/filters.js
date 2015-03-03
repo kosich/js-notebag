@@ -1,10 +1,10 @@
 angular.module( 'app' )
-.filter( 'shorten', function(  ){
+.filter( 'shorten', ()=>{
     'use strict';
 
-    var CUT_LEN = 30;
+    const CUT_LEN = 30;
 
-    return function( text ){
+    return ( text ) => {
         if ( !text || text.length < CUT_LEN )
             return text;
 
