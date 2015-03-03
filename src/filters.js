@@ -1,5 +1,5 @@
 angular.module( 'app' )
-.filter( 'shorten', ()=>{
+.filter( 'shorten', function(){
     'use strict';
 
     const CUT_LEN = 30;

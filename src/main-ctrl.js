@@ -1,48 +1,51 @@
 angular.module( 'app' )
-.controller( 'main', [ '$scope', 'notesStorage', ( $scope, notesStorage ) => {
-    'use strict';
+.controller( 'main', function ( $scope, notesStorage ) {
+  'use strict';
 
-    var notes = [];
+  // console.log('Ellow');
 
-    // TODO: refactor: awfull all $digest call
-    $scope.$watch( ()=> notesStorage.all , ()=>{
-        $scope.notes = notes = notesStorage.all;
-    }, true );
+  var notes = [];
 
-    var note = $scope.note = {};
+  // TODO: refactor: awfull all $digest call
+  $scope.$watch( ()=> notesStorage.all , ()=>{
+    $scope.notes = notes = notesStorage.all;
+  }, true );
 
-    // help functions
-    Object.defineProperty(this, 'overwriting', { 
-        get : function(){
-            return notesStorage.contains( note.name );
-        } 
-    });
+  var note = $scope.note = {};
 
-    Object.defineProperty(this, 'isnew', { 
-        get : function(){             
-            return !!note.name && !(notesStorage.contains( note.name ));
-        } 
-    });
+  // help functions
+  Object.defineProperty(this, 'overwriting', { 
+    get : function(){
+      return notesStorage.contains( note.name );
+    } 
+  });
 
-    this.create = ( )=>{
-        note.name = '';
-        note.text = '';
-    };
+  Object.defineProperty(this, 'isnew', { 
+    get : function(){             
+      return !!note.name && !(notesStorage.contains( note.name ));
+    } 
+  });
 
-    this.save = function( ){
-        notesStorage.set( note.name || '[no title]', note.text || '' );
-    };
+  this.create = ( )=>{
+    note.name = '';
+    note.text = '';
+  };
 
-    this.open = ( anote ) => {
-        console.log( 'opened', anote );
-        note.name = anote.name;
-        note.text = anote.text;
-    };
+  this.save = function( ){
+    notesStorage.set( note.name || '[no title]', note.text || '' );
+  };
 
-    this.remove = function( anote ){
-        notesStorage.remove( anote.name );
-    };
+  this.open = ( anote ) => {
+    console.log( 'opened', anote );
+    note.name = anote.name;
+    note.text = anote.text;
+  };
+
+  this.remove = function( anote ){
+    notesStorage.remove( anote.name );
+  };
 
 
-} ] );
+} 
+           );
 

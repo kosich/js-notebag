@@ -6,21 +6,26 @@ var gulp = require('gulp'),
 // var concat = require('gulp-concat');
  
 
-gulp.task('default', function () {
+gulp.task( 'build', function(){
+
   return gulp.src('src/*.js')
-    // .pipe($.watch('src/*.js'))
     // .pipe($.plumber())
     .pipe($.sourcemaps.init())
-    .pipe($.traceur({
-      // amd, commonjs, closure, instantiate, inline, register
-      // modules : 'commonjs'
-      modules : undefined
-    }))
-    .pipe($.concat('b.js'))
+
     // .pipe($.webpack())
-    // .pipe($.uglify())
+    .pipe($.concat('b.js'))
+
+    .pipe($.babel())
+    .pipe($.ngAnnotate())
+    .pipe($.uglify())
     .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest('dist'));
+} )
 
+gulp.task('watch', function () {
+  $.watch('src/*.js', function(){
+    gulp.start([ 'build' ]);
+  })
 });
 
+gulp.task('default', [ 'build', 'watch' ]);
