@@ -1,0 +1,27 @@
+{
+  "name": "js-notebag",
+  "version": "1.0.0",
+  "description": "js+html5 offline note storage",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kosich/js-notebag"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kosich/js-notebag/issues"
+  },
+  "homepage": "https://github.com/kosich/js-notebag",
+  "dependencies": {
+    "angular": "^1.3.14",
+    "jquery": "^2.1.3"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-traceur": "^0.17.0"
+  }
+}
