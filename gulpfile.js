@@ -1,10 +1,7 @@
+'use strict';
+
 var gulp = require('gulp'),
     $ = require('gulp-load-plugins')();
-
-// var sourcemaps = require('gulp-sourcemaps');
-// var traceur = require('gulp-traceur');
-// var concat = require('gulp-concat');
- 
 
 gulp.task( 'build', function(){
 
@@ -12,15 +9,16 @@ gulp.task( 'build', function(){
     // .pipe($.plumber())
     .pipe($.sourcemaps.init())
 
-    // .pipe($.webpack())
-    .pipe($.concat('b.js'))
+    .pipe($.webpack(
+        require( './webpack.config.js' )
+    ))
 
-    .pipe($.babel())
+    // .pipe($.babel())
     .pipe($.ngAnnotate())
-    .pipe($.uglify())
+    // .pipe($.uglify())
     .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest('dist'));
-} )
+} );
 
 gulp.task('watch', function () {
   $.watch('src/*.js', function(){

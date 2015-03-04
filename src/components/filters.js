@@ -1,5 +1,6 @@
-angular.module( 'app' )
-.filter( 'shorten', function(){
+var app = require( '../appModule.js' );
+
+app.filter( 'shorten', function(){
     'use strict';
 
     const CUT_LEN = 30;

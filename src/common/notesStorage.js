@@ -1,5 +1,6 @@
-angular.module( 'app' )
-.service( 'notesStorage', [ '$window' , function( $window ){
+var common = require( './common.js' );
+
+common.service( 'notesStorage', [ '$window' , function( $window ){
     'use strict';
 
     var storage = $window.localStorage;
