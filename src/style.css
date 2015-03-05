@@ -1,5 +1,16 @@
 body {
     padding: 1em;
+    background-color: #f1f1f1;
+}
 
+.list-note{
+    border: 1px solid transparent;
+    padding: 0.25em 0.5em;
+    cursor: pointer;
+}
+
+.list-note-active{
     background-color: #fcfcfc;
+    border-color: white;
+    box-shadow: 0 0 1px rgba( 0,0,0,0.2 );
 }

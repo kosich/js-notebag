@@ -1,0 +1,35 @@
+<form class='form form-horizontal'>
+    <div class='form-group'>
+
+        <div class='col-xs-6 col-sm-2'>
+            <button tabindex='5' type='button'
+                ng-click='item.reset()'
+                class='btn btn-info btn-block btn-lg'>new</button>
+        </div>
+
+        <div class='col-xs-6 col-sm-2 col-sm-push-8'>
+            <button tabindex='3' type='submit'
+                ng-class='{ "btn-danger" : item.overwriting, "btn-success" : item.isnew  }'
+                ng-click='item.save()'
+                ng-disabled='!item.note.name'
+                class='btn btn-block btn-lg'>save</button>
+        </div>
+
+        <div class='visible-xs-block clearfix' >
+            <br />
+        </div>
+
+        <div class='col-sm-8 col-sm-pull-2'>
+            <input placeholder='name' tabindex='1' type='text' class='form-control input-lg' ng-model='item.note.name' >
+        </div>
+
+    </div>
+
+    <div class='form-group'>
+        <div class='col-md-12'>
+            <textarea placeholder='item.note...' tabindex='2' class='form-control' rows='20' ng-model='item.note.text'></textarea>
+        </div>
+    </div>
+
+</form>
+
