@@ -14,7 +14,7 @@ module.exports = angular.module('app', [ 'ui.router', 'common', 'templates' ])
         controller: 'main as main'
     })
     .state('home.main', {
-        url: '', // {id}
+        url: '{id}',
         views: {
             'item' : {
                 templateUrl: 'components/item.html',

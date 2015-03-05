@@ -31,7 +31,7 @@ app.controller( 'list', class ListController{
 
     routeTo ( note ){
         console.log( 'routing to ', note.name )
-        this.$state.go( 'home.item', { id: note.name } );
+        this.$state.go( 'home.main', { id: note.name } );
     }
 
 

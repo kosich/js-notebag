@@ -72,7 +72,7 @@
 	        templateUrl: "components/main.html",
 	        controller: "main as main"
 	    }).state("home.main", {
-	        url: "", // {id}
+	        url: "{id}",
 	        views: {
 	            item: {
 	                templateUrl: "components/item.html",
@@ -216,7 +216,7 @@
 	        routeTo: {
 	            value: function routeTo(note) {
 	                console.log("routing to ", note.name);
-	                this.$state.go("home.item", { id: note.name });
+	                this.$state.go("home.main", { id: note.name });
 	            },
 	            writable: true,
 	            configurable: true
