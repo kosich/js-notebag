@@ -4,7 +4,7 @@ var app = require( '../appModule.js' );
 require( '../common/notesStorage.js' );
 var Note = require( './Note.js' );
 
-app.controller( 'itemView', class ItemView{
+app.controller( 'item', class ItemView{
 
     constructor ( $stateParams, notesStorage ){
 

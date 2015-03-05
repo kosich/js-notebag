@@ -1,26 +1,15 @@
 <div class='container-fluid'>
     <section class='row'>
         <aside class='col-md-3 col-sm-3'>
-            <div class='form-group'>
-                <input type='text' placeholder='filter' tabindex='4' class='form-control' ng-model='filterString' >
-            </div>
-            <div class='clearfix list-note'
-                ui-sref-active='list-note-active' 
-                ng-click='main.routeTo(anote)'
-                ng-repeat='anote in main.notes | filter:filterString | limitTo:10'>
-                <button type="button" ng-click='main.remove(anote)' class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <a ui-sref='home.item({ id : anote.name })'>
-                    {{ anote.name }}
-                </a>
-                <div class='small hidden-xs '>{{ anote.text|shorten }}</div>
-            </div>
+
+            <div ui-view='list'></div>
 
         </aside>
 
         <main class='col-md-9 col-sm-9'>
             <br class='visible-xs-block' />
 
-            <div ui-view ></div>
+            <div ui-view='item'></div>
         </main>
     </section>
 

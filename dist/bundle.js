@@ -50,6 +50,7 @@
 	__webpack_require__(2);
 	__webpack_require__(3);
 	__webpack_require__(4);
+	__webpack_require__(5);
 
 	// TODO: try webpacks require css
 	// require( '../node_modules/bootstrap/dist/css/bootstrap.css' );
@@ -62,18 +63,26 @@
 
 	// var angular = require( 'angular' );
 	// require('angular-ui-router');
-	__webpack_require__(5);
+	__webpack_require__(6);
 
 	module.exports = angular.module("app", ["ui.router", "common", "templates"]).config(["$stateProvider", function ($stateProvider) {
 
 	    $stateProvider.state("home", {
-	        url: "",
+	        abstract: true,
 	        templateUrl: "components/main.html",
 	        controller: "main as main"
-	    }).state("home.item", {
-	        url: "/{id}",
-	        templateUrl: "components/item.html",
-	        controller: "itemView as item"
+	    }).state("home.main", {
+	        url: "", // {id}
+	        views: {
+	            item: {
+	                templateUrl: "components/item.html",
+	                controller: "item as item"
+	            },
+	            list: {
+	                templateUrl: "components/list.html",
+	                controller: "list as list"
+	            }
+	        }
 	    });
 	}]);
 
@@ -108,66 +117,10 @@
 	var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
 
 	var app = __webpack_require__(1);
-	__webpack_require__(6);
-	var Note = __webpack_require__(7);
+	__webpack_require__(7);
+	var Note = __webpack_require__(8);
 
-	app.controller("main", (function () {
-	    function MainController($scope, $state, notesStorage) {
-	        _classCallCheck(this, MainController);
-
-	        var self = this;
-
-	        // saving providers
-	        this.$state = $state;
-	        this.notesStorage = notesStorage;
-
-	        this.notes = [];
-
-	        // TODO: refactor: awfull all $digest call
-	        $scope.$watch(function () {
-	            return notesStorage.all;
-	        }, function () {
-	            self.notes = notesStorage.all;
-	        }, true);
-	    }
-	    MainController.$inject = ["$scope", "$state", "notesStorage"];
-
-	    _prototypeProperties(MainController, null, {
-	        remove: {
-	            value: function remove(note) {
-	                this.notesStorage.remove(note.name);
-	            },
-	            writable: true,
-	            configurable: true
-	        },
-	        routeTo: {
-	            value: function routeTo(note) {
-	                console.log("routing to ", note.name);
-	                this.$state.go("home.item", { id: note.name });
-	            },
-	            writable: true,
-	            configurable: true
-	        }
-	    });
-
-	    return MainController;
-	})());
-
-/***/ },
-/* 4 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	var _prototypeProperties = function (child, staticProps, instanceProps) { if (staticProps) Object.defineProperties(child, staticProps); if (instanceProps) Object.defineProperties(child.prototype, instanceProps); };
-
-	var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
-
-	var app = __webpack_require__(1);
-	__webpack_require__(6);
-	var Note = __webpack_require__(7);
-
-	app.controller("itemView", (function () {
+	app.controller("item", (function () {
 	    function ItemView($stateParams, notesStorage) {
 	        _classCallCheck(this, ItemView);
 
@@ -216,7 +169,81 @@
 	})());
 
 /***/ },
+/* 4 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var _prototypeProperties = function (child, staticProps, instanceProps) { if (staticProps) Object.defineProperties(child, staticProps); if (instanceProps) Object.defineProperties(child.prototype, instanceProps); };
+
+	var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
+
+	var app = __webpack_require__(1);
+	__webpack_require__(7);
+	var Note = __webpack_require__(8);
+
+	app.controller("list", (function () {
+	    function ListController($scope, $state, notesStorage) {
+	        _classCallCheck(this, ListController);
+
+	        console.log("list controller init");
+
+	        var self = this;
+
+	        // saving providers
+	        this.$state = $state;
+	        this.notesStorage = notesStorage;
+
+	        this.notes = [];
+
+	        // TODO: refactor: awfull all $digest call
+	        $scope.$watch(function () {
+	            return notesStorage.all;
+	        }, function () {
+	            self.notes = notesStorage.all;
+	        }, true);
+	    }
+	    ListController.$inject = ["$scope", "$state", "notesStorage"];
+
+	    _prototypeProperties(ListController, null, {
+	        remove: {
+	            value: function remove(note) {
+	                this.notesStorage.remove(note.name);
+	            },
+	            writable: true,
+	            configurable: true
+	        },
+	        routeTo: {
+	            value: function routeTo(note) {
+	                console.log("routing to ", note.name);
+	                this.$state.go("home.item", { id: note.name });
+	            },
+	            writable: true,
+	            configurable: true
+	        }
+	    });
+
+	    return ListController;
+	})());
+
+/***/ },
 /* 5 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
+
+	var app = __webpack_require__(1);
+	__webpack_require__(7);
+	var Note = __webpack_require__(8);
+
+	app.controller("main", function MainController() {
+	  _classCallCheck(this, MainController);
+	});
+
+/***/ },
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -226,12 +253,12 @@
 	module.exports = angular.module("common", []);
 
 /***/ },
-/* 6 */
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var common = __webpack_require__(5);
+	var common = __webpack_require__(6);
 
 	common.service("notesStorage", ["$window", function ($window) {
 	    "use strict";
@@ -275,7 +302,7 @@
 	}]);
 
 /***/ },
-/* 7 */
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";

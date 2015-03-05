@@ -9,14 +9,22 @@ module.exports = angular.module('app', [ 'ui.router', 'common', 'templates' ])
 
     $stateProvider
     .state('home', {
-        url: '',
+        abstract: true,
         templateUrl: 'components/main.html',
         controller: 'main as main'
     })
-    .state('home.item', {
-        url: '/{id}',
-        templateUrl: 'components/item.html',
-        controller: 'itemView as item'
+    .state('home.main', {
+        url: '', // {id}
+        views: {
+            'item' : {
+                templateUrl: 'components/item.html',
+                controller: 'item as item'
+            },
+            'list' : {
+                templateUrl: 'components/list.html',
+                controller: 'list as list'
+            }
+        }
     });
 
 } );

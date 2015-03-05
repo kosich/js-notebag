@@ -1,0 +1,14 @@
+<div class='form-group'>
+    <input type='text' placeholder='filter' tabindex='4' class='form-control' ng-model='filterString' >
+</div>
+<div class='clearfix list-note'
+    ui-sref-active='list-note-active' 
+    ng-click='list.routeTo(anote)'
+    ng-repeat='note in list.notes | filter:filterString | limitTo:10'>
+    <button type="button" ng-click='list.remove(note)' class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <a ui-sref='home.item({ id : note.name })'>
+        {{ note.name }}
+    </a>
+    <div class='small hidden-xs '>{{ note.text|shorten }}</div>
+</div>
+
