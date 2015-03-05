@@ -3,9 +3,17 @@
 var gulp = require('gulp'),
     $ = require('gulp-load-plugins')();
 
-gulp.task( 'build', function(){
+var PATHS = {
+    src : {
+        scripts : 'src/**/*.js',
+        templates : ['src/**/*.html', '!src/index.html']
+    },
+    dest : 'dist'
+}
 
-  return gulp.src('src/*.js')
+gulp.task( 'scripts', function(){
+
+    return gulp.src(PATHS.src.scripts)
     // .pipe($.plumber())
     .pipe($.sourcemaps.init())
 
@@ -17,13 +25,27 @@ gulp.task( 'build', function(){
     .pipe($.ngAnnotate())
     // .pipe($.uglify())
     .pipe($.sourcemaps.write('.'))
-    .pipe(gulp.dest('dist'));
+    .pipe(gulp.dest(PATHS.dest));
 } );
 
-gulp.task('watch', function () {
-  $.watch('src/*.js', function(){
-    gulp.start([ 'build' ]);
-  })
+gulp.task('templates', function(){
+    gulp.src(PATHS.src.templates)
+    .pipe($.angularTemplatecache({
+        standalone: true
+    }))
+    .pipe(gulp.dest(PATHS.dest));
 });
 
-gulp.task('default', [ 'build', 'watch' ]);
+gulp.task('watch', function () {
+
+  $.watch(PATHS.src.scripts, function(){
+    gulp.start([ 'scripts' ]);
+  });
+
+  $.watch(PATHS.src.templates, function(){
+    gulp.start([ 'templates' ]);
+  });
+
+});
+
+gulp.task('default', [ 'templates', 'scripts', 'watch' ]);
