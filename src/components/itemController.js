@@ -6,7 +6,9 @@ var Note = require( './Note.js' );
 
 app.controller( 'item', class ItemView{
 
-    constructor ( $stateParams, notesStorage ){
+    constructor ( $state, $stateParams, notesStorage ){
+
+        this.$state = $state;
 
         let noteName = $stateParams.id;
         this.notesStorage = notesStorage;
@@ -18,6 +20,7 @@ app.controller( 'item', class ItemView{
 
     reset ( ){
         this.note = new Note();
+        this.$state.go( 'home.main', { id: undefined } );
     }
 
     save ( ) {

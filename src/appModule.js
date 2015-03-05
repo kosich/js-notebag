@@ -3,12 +3,14 @@
 // var angular = require( 'angular' );
 // require('angular-ui-router');
 require('./common/common.js');
+require('./help/helpModule.js');
 
-module.exports = angular.module('app', [ 'ui.router', 'common', 'templates' ])
+module.exports = angular.module('app', [ 'ui.router', 'help', 'common', 'templates' ])
 .config( function( $stateProvider ){
 
     $stateProvider
     .state('home', {
+        url: '',
         abstract: true,
         templateUrl: 'components/main.html',
         controller: 'main as main'

@@ -15,15 +15,15 @@ gulp.task( 'scripts', function(){
 
     return gulp.src(PATHS.src.scripts)
     // .pipe($.plumber())
+    // NOTE: currently source maps dont work
     .pipe($.sourcemaps.init())
 
     .pipe($.webpack(
+        // here some webpack-babel plugin is applied
         require( './webpack.config.js' )
     ))
-
-    // .pipe($.babel())
     .pipe($.ngAnnotate())
-    // .pipe($.uglify())
+    .pipe($.uglify())
     .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest(PATHS.dest));
 } );

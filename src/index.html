@@ -6,6 +6,15 @@
         <link rel='stylesheet' href='style.css' >
     </head>
     <body >
+        <ul class='nav nav-pills'>
+            <li role='presentation' ui-sref-active='active'>
+                <a ui-sref='home.main'>Home</a>
+            </li>
+            <li role='presentation' ui-sref-active='active'>
+                <a ui-sref='help'>Help</a>
+            </li>
+        </ul>
+
         <div ui-view ></div>
 
         <script src='../node_modules/angular/angular.js' ></script>
